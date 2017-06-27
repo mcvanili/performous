@@ -71,6 +71,7 @@ list(APPEND LIBS ${Boost_LIBRARIES})
 find_package(LibEpoxy 1.2 REQUIRED)
 include_directories(${LibEpoxy_INCLUDE_DIRS})
 list(APPEND LIBS ${LibEpoxy_LIBRARIES})
+add_definitions("-DEPOXY_SHARED")
 
 # Find all the libs that don't require extra parameters
 foreach(lib ${OUR_LIBS} SDL2 PangoCairo LibRSVG LibXML++ AVFormat AVResample SWScale Z Jpeg Png PortAudio Fontconfig JSONCPP Cppnetlib Crypto Ssl)
