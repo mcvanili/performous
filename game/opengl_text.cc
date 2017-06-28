@@ -262,16 +262,23 @@ void SvgTxtTheme::draw(std::vector<TZoomText> const& _text) {
 	}
 
 	double texture_ar = text_x / text_y;
-	m_texture_width = std::min(0.96, text_x/800.);
+	m_texture_width = std::min(0.96, text_x/screenW()); // Previous value of 800 appears to be a left-over from 800x600 times.
 	m_texture_height = m_texture_width / texture_ar;
 
 	double position_x = dimensions.x1();
 	if (m_align == CENTER) position_x -= 0.5 * m_texture_width;
 	if (m_align == RIGHT) position_x -= m_texture_width;
 
-	if ((position_x + m_texture_width) > 0.48) {
-		m_texture_width = (0.48 - position_x);
+
+// Make sure text never goes off-screen.
+	if (position_x < 0.02) { 
+		position_x = 0.02;
 	}
+	if ((position_x + m_texture_width) > 0.48) { 
+		m_texture_width = (0.48 - position_x);
+		m_texture_height = m_texture_width / texture_ar; // Keep aspect ratio.
+	}
+	
 	for (unsigned int i = 0; i < _text.size(); i++ ) {
 		double syllable_x = m_opengl_text[i].x();
 		double syllable_width = syllable_x *  m_texture_width / text_x;
