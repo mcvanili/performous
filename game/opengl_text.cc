@@ -269,11 +269,6 @@ void SvgTxtTheme::draw(std::vector<TZoomText> const& _text) {
 	if (m_align == CENTER) position_x -= 0.5 * m_texture_width;
 	if (m_align == RIGHT) position_x -= m_texture_width;
 
-
-// Make sure text never goes off-screen.
-	if (position_x < 0.02) { 
-		position_x = 0.02;
-	}
 	if ((position_x + m_texture_width) > 0.48) { 
 		m_texture_width = (0.48 - position_x);
 		m_texture_height = m_texture_width / texture_ar; // Keep aspect ratio.
