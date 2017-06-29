@@ -262,7 +262,7 @@ void SvgTxtTheme::draw(std::vector<TZoomText> const& _text) {
 	}
 
 	double texture_ar = text_x / text_y;
-	m_texture_width = std::min(0.96, text_x/screenW()); // Previous value of 800 appears to be a left-over from 800x600 times.
+	m_texture_width = std::min(0.96, text_x/1366); // Previous value of 800 appears to be a left-over from 800x600 times.
 	m_texture_height = m_texture_width / texture_ar;
 
 	double position_x = dimensions.x1();
