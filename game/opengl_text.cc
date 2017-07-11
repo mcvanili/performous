@@ -75,9 +75,13 @@ OpenGLText::OpenGLText(TextStyle& _text, double m) {
 	std::shared_ptr<PangoLayout> layout(
 	  pango_layout_new(ctx.get()),
 	  g_object_unref);
+	PangoAttrList* attributes = pango_attr_list_new();
+	pango_attr_list_insert (attributes, pango_attr_fallback_new(TRUE));
+	pango_layout_set_attributes(layout.get(), attributes);
 	pango_layout_set_alignment(layout.get(), alignment);
 	pango_layout_set_font_description(layout.get(), desc.get());
 	pango_layout_set_text(layout.get(), _text.text.c_str(), -1);
+	
 	// Compute text extents
 	{
 		PangoRectangle rec;
